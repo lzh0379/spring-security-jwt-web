@@ -1,0 +1,8 @@
+spring:
+  jackson:
+    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+    property-naming-strategy: CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES
+management.context-path: /management
+security.basic.enabled: false
+logging.level.org.springframework.security: INFO
+logging.level.org.springframework.security.jwt.sample: DEBUG
