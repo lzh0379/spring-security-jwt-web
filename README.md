@@ -1,1 +1,1 @@
-# Spring Security JWT Filter Sample
+# Spring Security JWT Authentication Filter Sample
