@@ -1,4 +1,4 @@
-package org.springframework.security.jwt.sample.web;
+package org.springframework.security.jwt.sample.customfilter.web;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;

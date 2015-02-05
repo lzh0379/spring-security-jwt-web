@@ -2,7 +2,13 @@ spring:
   jackson:
     date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
     property-naming-strategy: CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES
+jwt:
+  secret: my-super-duper-secret
+  expiry-seconds: 86400 # 1 day
+  login-url: /api/login
+  login-username-header-name: X-Auth-Username
+  login-password-header-name: X-Auth-Password
+  authentication-token-header-name: X-Auth-Token
 management.context-path: /management
-security.basic.enabled: false
 logging.level.org.springframework.security: INFO
 logging.level.org.springframework.security.jwt.sample: DEBUG
