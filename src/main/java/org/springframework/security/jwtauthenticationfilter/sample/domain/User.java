@@ -1,4 +1,4 @@
-package org.springframework.security.jwt.sample.customfilter.domain;
+package org.springframework.security.jwtauthenticationfilter.sample.domain;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -36,7 +36,7 @@ public class User {
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     @Column(name = "role_name")
-    private List<Role> roles = new ArrayList<>();
+    private List<Role> roles = new ArrayList<Role>();
 
     public Long getId() {
         return id;

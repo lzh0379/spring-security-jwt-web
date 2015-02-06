@@ -2,5 +2,5 @@
     |    /  \    /  \__    ___/
     |    \   \/\/   / |    |   
 /\__|    |\        /  |    |   
-\________| \__/\  /   |____|   Spring Security JWT Sample
+\________| \__/\  /   |____|   Spring Security JWT Authentication Filter Sample
                 \/

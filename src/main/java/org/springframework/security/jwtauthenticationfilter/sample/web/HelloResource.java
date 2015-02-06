@@ -1,4 +1,4 @@
-package org.springframework.security.jwt.sample.customfilter.web;
+package org.springframework.security.jwtauthenticationfilter.sample.web;
 
 public class HelloResource {
 

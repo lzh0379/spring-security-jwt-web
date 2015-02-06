@@ -16,8 +16,8 @@ apply plugin: "idea"
 apply plugin: "spring-boot"
 
 ext {
-    angularJwtVersion = "0.0.6"
-    javaVersion = "1.8"
+    javaVersion = "1.7"
+    javaJwtVersion = "2.0.1"
 }
 
 repositories {

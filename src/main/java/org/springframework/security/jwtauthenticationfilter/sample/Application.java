@@ -1,4 +1,4 @@
-package org.springframework.security.jwt.sample.customfilter;
+package org.springframework.security.jwtauthenticationfilter.sample;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.jwt.sample.customfilter.domain.Role;
-import org.springframework.security.jwt.sample.customfilter.domain.User;
-import org.springframework.security.jwt.sample.customfilter.repository.UserRepository;
+import org.springframework.security.jwtauthenticationfilter.sample.domain.Role;
+import org.springframework.security.jwtauthenticationfilter.sample.domain.User;
+import org.springframework.security.jwtauthenticationfilter.sample.repository.UserRepository;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,8 +39,8 @@ public class Application {
 
             @Override
             public void afterPropertiesSet() {
-                addUser("admin", "pwd", Arrays.asList(Role.ROLE_ADMIN, Role.ROLE_USER));
-                addUser("user", "pwd", Arrays.asList(Role.ROLE_USER));
+                addUser("admin", "pwd", Arrays.asList(Role.ADMIN, Role.USER));
+                addUser("user", "pwd", Arrays.asList(Role.USER));
             }
 
             private void addUser(String username, String password, List<Role> roles) {
