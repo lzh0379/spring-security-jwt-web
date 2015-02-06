@@ -27,15 +27,15 @@ repositories {
     maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
 }
 
-configurations.all {
-    resolutionStrategy {
-        eachDependency { org.gradle.api.artifacts.DependencyResolveDetails details ->
-            if (details.requested.group == "org.springframework.security") {
-                details.useVersion "4.0.0.RC1"
-            }
-        }
-    }
-}
+//configurations.all {
+//    resolutionStrategy {
+//        eachDependency { org.gradle.api.artifacts.DependencyResolveDetails details ->
+//            if (details.requested.group == "org.springframework.security") {
+//                details.useVersion "4.0.0.RC1"
+//            }
+//        }
+//    }
+//}
 
 dependencies {
     compile("com.auth0:java-jwt:${javaJwtVersion}")
@@ -43,6 +43,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.springframework.boot:spring-boot-starter-security")
     compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.security:spring-security-jwt")
     testCompile("com.jayway.jsonpath:json-path")
     testCompile("org.codehaus.groovy:groovy")
     testCompile("org.springframework.boot:spring-boot-starter-test")

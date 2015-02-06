@@ -3,6 +3,7 @@ package org.springframework.security.jwtauthenticationfilter.sample.security;
 import com.auth0.jwt.JWTSigner;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.JWTVerifyException;
+import org.springframework.util.Assert;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
@@ -24,6 +25,7 @@ public class Auth0JwtTokenService implements JwtTokenService {
     }
 
     public Auth0JwtTokenService(String secret, JWTSigner.Options options) {
+        Assert.notNull(secret, "secret must not be null");
         this.secret = secret;
         this.options = options;
         signer = new JWTSigner(secret);
