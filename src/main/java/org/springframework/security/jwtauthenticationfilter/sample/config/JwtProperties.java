@@ -1,4 +1,4 @@
-package org.springframework.security.jwtauthenticationfilter.sample.security;
+package org.springframework.security.jwtauthenticationfilter.sample.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

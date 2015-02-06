@@ -12,13 +12,13 @@ import org.springframework.util.Assert;
 import java.io.IOException;
 import java.util.Map;
 
-public class SpringSecurityJwtTokenService implements JwtTokenService {
+public class DefaultJwtTokenService implements JwtTokenService {
 
     private ObjectMapper objectMapper = new ObjectMapper();
     private String secret;
     private SignerVerifier signerVerifier;
 
-    public SpringSecurityJwtTokenService(String secret) {
+    public DefaultJwtTokenService(String secret) {
         Assert.notNull(secret, "secret must not be null");
         this.secret = secret;
         this.signerVerifier = new MacSigner(secret);

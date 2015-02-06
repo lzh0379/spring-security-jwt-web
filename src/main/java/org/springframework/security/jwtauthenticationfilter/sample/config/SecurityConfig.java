@@ -10,11 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.jwtauthenticationfilter.sample.security.Auth0JwtTokenService;
 import org.springframework.security.jwtauthenticationfilter.sample.security.JwtAuthenticationFilter;
-import org.springframework.security.jwtauthenticationfilter.sample.security.JwtProperties;
 import org.springframework.security.jwtauthenticationfilter.sample.security.JwtTokenService;
-import org.springframework.security.jwtauthenticationfilter.sample.security.SpringSecurityJwtTokenService;
+import org.springframework.security.jwtauthenticationfilter.sample.security.DefaultJwtTokenService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.util.StringUtils;
 
@@ -43,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .setExpirySeconds(properties.getTokenExpirySeconds())
                 .setIssuedAt(true);
         // JwtTokenService jwtTokenService = new Auth0JwtTokenService(properties.getTokenSecret(), options);
-        JwtTokenService jwtTokenService = new SpringSecurityJwtTokenService(properties.getTokenSecret());
+        JwtTokenService jwtTokenService = new DefaultJwtTokenService(properties.getTokenSecret());
 
         JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManagerBean(), jwtTokenService);
         if (StringUtils.hasText(properties.getLoginUrl())) {
