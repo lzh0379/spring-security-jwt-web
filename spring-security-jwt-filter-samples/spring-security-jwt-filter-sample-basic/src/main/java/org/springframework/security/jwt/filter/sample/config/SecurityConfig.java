@@ -7,8 +7,10 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.jwt.filter.DefaultJwtTokenService;
 import org.springframework.security.jwt.filter.JwtAuthenticationEntryPoint;
 import org.springframework.security.jwt.filter.JwtAuthenticationFilter;
+import org.springframework.security.jwt.filter.JwtTokenService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -32,7 +34,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
-        return new JwtAuthenticationFilter(authenticationManagerBean(), null); // TODO
+        return new JwtAuthenticationFilter(authenticationManagerBean(), jwtTokenService());
+    }
+
+    @Bean
+    public JwtTokenService jwtTokenService() {
+        return new DefaultJwtTokenService("my-secret");
     }
 
     @Override
