@@ -3,73 +3,88 @@ buildscript {
         jcenter()
         mavenCentral()
         maven { url "http://repo.spring.io/milestone" }
+        maven { url "http://repo.spring.io/plugins-release" }
         maven { url "http://repo.spring.io/snapshot" }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.1.RELEASE")
+        classpath("org.springframework.build.gradle:propdeps-plugin:0.0.7")
     }
 }
 
-apply plugin: "java"
-apply plugin: "groovy"
-apply plugin: "idea"
-apply plugin: "spring-boot"
+ext.sampleprojects = subprojects.findAll { project -> project.name.startsWith("spring-security-jwt-filter-sample") }
 
-ext {
-    javaVersion = "1.7"
-    javaJwtVersion = "2.0.1"
-}
+configure(allprojects) {
 
-repositories {
-    mavenCentral()
-    maven { url "http://repo.spring.io/milestone" }
-    maven { url "http://repo.spring.io/snapshot" }
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
-}
+    group = "org.springframework.security.jwt.filter"
 
-//configurations.all {
-//    resolutionStrategy {
-//        eachDependency { org.gradle.api.artifacts.DependencyResolveDetails details ->
-//            if (details.requested.group == "org.springframework.security") {
-//                details.useVersion "4.0.0.RC1"
-//            }
-//        }
-//    }
-//}
+    ext.jacksonVersion = "2.4.4"
+    ext.javaVersion = "1.7"
+    ext.junitVersion = "4.11"
+    ext.servletApiVersion = "3.0.1"
+    ext.springVersion = "4.1.4.RELEASE"
+    ext.springSecurityVersion = "3.2.5.RELEASE"
+    ext.springSecurityJwtVersion = "1.0.2.RELEASE"
 
-dependencies {
-    compile("com.auth0:java-jwt:${javaJwtVersion}")
-    compile("org.springframework.boot:spring-boot-starter-actuator")
-    compile("org.springframework.boot:spring-boot-starter-data-jpa")
-    compile("org.springframework.boot:spring-boot-starter-security")
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.security:spring-security-jwt")
-    testCompile("com.jayway.jsonpath:json-path")
-    testCompile("org.codehaus.groovy:groovy")
-    testCompile("org.springframework.boot:spring-boot-starter-test")
-    testCompile("org.springframework.security:spring-security-test")
-    runtime("org.hsqldb:hsqldb")
-}
+    apply plugin: "java"
+    apply plugin: "idea"
+    apply plugin: "maven"
+    apply plugin: "propdeps"
 
-compileJava {
-    sourceCompatibility = javaVersion
-    targetCompatibility = javaVersion
-}
-
-idea {
-    module {
-        inheritOutputDirs = false
-        outputDir = file("${project.buildDir}/classes/main")
-        testOutputDir = file("${project.buildDir}/classes/test")
-        downloadJavadoc = true
-        downloadSources = true
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven { url "http://repo.spring.io/milestone" }
+        maven { url "http://repo.spring.io/snapshot" }
     }
-    project {
-        jdkName = "${javaVersion}"
-        languageLevel = "${javaVersion}"
+
+    compileJava {
+        sourceCompatibility = javaVersion
+        targetCompatibility = javaVersion
+    }
+
+    compileTestJava {
+        sourceCompatibility = javaVersion
+        targetCompatibility = javaVersion
+    }
+
+    dependencies {
+        testCompile("junit:junit:${junitVersion}")
+    }
+
+    idea {
+        module {
+            downloadJavadoc = true
+            downloadSources = true
+        }
+    }
+}
+
+configure(sampleprojects) {
+
+    apply plugin: "spring-boot"
+
+    dependencies {
+        compile project(":spring-security-jwt-filter-core")
+        compile("org.springframework.boot:spring-boot-starter-security")
+        compile("org.springframework.boot:spring-boot-starter-web")
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+        testCompile("org.springframework.security:spring-security-test")
+    }
+}
+
+project("spring-security-jwt-filter-core") {
+
+    dependencies {
+        compile("com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}")
+        compile("org.springframework.security:spring-security-core:${springSecurityVersion}")
+        compile("org.springframework.security:spring-security-jwt:${springSecurityJwtVersion}")
+        compile("org.springframework.security:spring-security-web:${springSecurityVersion}")
+        provided("javax.servlet:javax.servlet-api:$servletApiVersion")
     }
 }
 
 task wrapper(type: Wrapper) {
+    description = "Generates gradlew[.bat] scripts"
     gradleVersion = "2.2"
 }
