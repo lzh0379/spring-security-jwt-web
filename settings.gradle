@@ -1,12 +1,12 @@
-rootProject.name = "spring-security-jwt-filter"
+rootProject.name = "spring-security-jwt-web"
 
 def String[] modules = [
-    "spring-security-jwt-filter-core"
+    "spring-security-jwt-web-core"
 ]
 
 def String[] samples = [
-    "spring-security-jwt-filter-sample-basic",
-    "spring-security-jwt-filter-sample-customized"
+    "spring-security-jwt-web-sample-basic",
+    "spring-security-jwt-web-sample-customized"
 ]
 
 include modules
@@ -14,5 +14,5 @@ include samples
 
 samples.each { name ->
     def p = findProject(":${name}")
-    p.projectDir = new File(settingsDir, "spring-security-jwt-filter-samples/${name}");
+    p.projectDir = new File(settingsDir, "spring-security-jwt-web-samples/${name}");
 }

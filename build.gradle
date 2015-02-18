@@ -12,19 +12,21 @@ buildscript {
     }
 }
 
-ext.sampleprojects = subprojects.findAll { project -> project.name.startsWith("spring-security-jwt-filter-sample") }
+ext.sampleprojects = subprojects.findAll { project -> project.name.startsWith("spring-security-jwt-web-sample") }
 
 configure(allprojects) {
 
-    group = "org.springframework.security.jwt.filter"
+    group = "com.github.marceloverdijk"
 
-    ext.jacksonVersion = "2.4.4"
-    ext.javaVersion = "1.7"
-    ext.junitVersion = "4.11"
-    ext.servletApiVersion = "3.0.1"
-    ext.springVersion = "4.1.4.RELEASE"
-    ext.springSecurityVersion = "3.2.5.RELEASE"
-    ext.springSecurityJwtVersion = "1.0.2.RELEASE"
+    ext {
+        jacksonVersion = "2.4.4"
+        javaVersion = "1.7"
+        junitVersion = "4.11"
+        servletApiVersion = "3.0.1"
+        springVersion = "4.1.4.RELEASE"
+        springSecurityVersion = "3.2.5.RELEASE"
+        springSecurityJwtVersion = "1.0.3.RELEASE"
+    }
 
     apply plugin: "java"
     apply plugin: "idea"
@@ -60,19 +62,7 @@ configure(allprojects) {
     }
 }
 
-configure(sampleprojects) {
-
-    apply plugin: "spring-boot"
-
-    dependencies {
-        compile project(":spring-security-jwt-filter-core")
-        compile("org.springframework.boot:spring-boot-starter-security")
-        compile("org.springframework.boot:spring-boot-starter-web")
-        testCompile("org.springframework.boot:spring-boot-starter-test")
-    }
-}
-
-project("spring-security-jwt-filter-core") {
+project("spring-security-jwt-web-core") {
 
     dependencies {
         compile("com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}")
@@ -80,6 +70,18 @@ project("spring-security-jwt-filter-core") {
         compile("org.springframework.security:spring-security-jwt:${springSecurityJwtVersion}")
         compile("org.springframework.security:spring-security-web:${springSecurityVersion}")
         provided("javax.servlet:javax.servlet-api:$servletApiVersion")
+    }
+}
+
+configure(sampleprojects) {
+
+    apply plugin: "spring-boot"
+
+    dependencies {
+        compile project(":spring-security-jwt-web-core")
+        compile("org.springframework.boot:spring-boot-starter-security")
+        compile("org.springframework.boot:spring-boot-starter-web")
+        testCompile("org.springframework.boot:spring-boot-starter-test")
     }
 }
 

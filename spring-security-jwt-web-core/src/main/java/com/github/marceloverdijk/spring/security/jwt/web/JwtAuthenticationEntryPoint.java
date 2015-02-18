@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.springframework.security.jwt.filter;
+package com.github.marceloverdijk.spring.security.jwt.web;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;

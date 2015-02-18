@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.jwt.filter.DefaultJwtTokenService;
-import org.springframework.security.jwt.filter.JwtAuthenticationEntryPoint;
+import com.github.marceloverdijk.spring.security.jwt.web.JwtAuthenticationEntryPoint;
 import org.springframework.security.jwt.filter.JwtAuthenticationFilter;
 import org.springframework.security.jwt.filter.JwtTokenService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
