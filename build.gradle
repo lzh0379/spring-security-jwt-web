@@ -87,5 +87,5 @@ configure(sampleprojects) {
 
 task wrapper(type: Wrapper) {
     description = "Generates gradlew[.bat] scripts"
-    gradleVersion = "2.2"
+    gradleVersion = "2.3"
 }
